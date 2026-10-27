@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+
+# Personal settings (contains the API encryption key)
+voice-pe-echo.toml
+# Recordings from --save-dir
+recordings/

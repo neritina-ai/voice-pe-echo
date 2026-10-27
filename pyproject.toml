@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-pe-echo"
+dynamic = ["version"]
+description = "Play back every sentence heard by a Home Assistant Voice PE on the PC speakers."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aioesphomeapi>=40",
+    "zeroconf>=0.130",
+    "numpy>=1.24",
+    "sounddevice>=0.4.6",
+    # Prebuilt for Windows, Linux and Apple Silicon; Intel Macs fall back to the energy VAD.
+    "pysilero-vad>=3.0; sys_platform != 'darwin' or platform_machine == 'arm64'",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+voice-pe-echo = "voice_pe_echo.cli:main"
+
+[tool.setuptools]
+packages = ["voice_pe_echo"]
+
+[tool.setuptools.dynamic]
+version = { attr = "voice_pe_echo.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
