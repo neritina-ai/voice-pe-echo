@@ -7,8 +7,8 @@
 host = ""
 
 # API 加密金鑰（base64 字串，結尾通常是 "="）。
-# Voice PE 曾加入 Home Assistant 就一定要填；取得方式見 docs/user-guide.md「取得加密金鑰」。
-# 裝置恢復原廠設定後、沒加入 Home Assistant 的話，請留空。
+# 剛買來、沒加入過 Home Assistant 的 Voice PE 沒有金鑰，請留空。
+# 只有加入過 Home Assistant 才需要填；取得方式見 docs/user-guide.md 附錄「取得加密金鑰」。
 key = ""
 
 # 播放用的輸出裝置：留空 = 系統預設喇叭；可填 run.bat --list-devices 列出的編號或名稱的一部分

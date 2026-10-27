@@ -30,7 +30,8 @@ class FoundDevice:
         )
 
     def describe(self) -> str:
-        key = {"key": "需要金鑰", "none": "不需要金鑰"}.get(self.encryption, "金鑰未知")
+        # Old firmware advertises neither flag; it has no encryption at all.
+        key = "需要金鑰" if self.encryption == "key" else "不需要金鑰"
         mac = ":".join(self.mac[i : i + 2] for i in range(0, len(self.mac), 2)) or "?"
         firmware = self.project_version or "?"
         return (

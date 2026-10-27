@@ -56,15 +56,16 @@ ESPHome 的語音助理同一時間只接受一個訂閱者，第二個會被拒
 明確告訴使用者去 HA 停用裝置，並每 30 秒重試訂閱；使用者停用 HA 之後會自動接手。
 反過來，如果是本程式先佔用、HA 後來才想連，日誌裡的「目前佔用者」是本程式自己（`voice-pe-echo`），這時只提醒使用者「結束後要在 HA 重新載入」，不會誤判成自己被拒絕。
 
-這個「停用 HA」的要求是 ESPHome 架構決定的，無法繞過；手冊因此把它寫成固定步驟，並說明用完如何復原。
+這個限制只影響「已經加入 HA」的 Voice PE。剛買來、只設定過 Wi-Fi 的 Voice PE 沒有任何客戶端連著，本程式就是唯一的語音助理伺服器，
+所以手冊以「不需要 HA」為主要流程，已加入 HA 的情況（停用裝置、用完復原）放在附錄。
 
 ## 4. 加密金鑰
 
 Voice PE 韌體設定了 `api: encryption:`（不寫死金鑰）：加入 HA 時，HA 會產生隨機金鑰寫進裝置，並存在 HA 的
 `.storage/esphome.encryption_keys`（以 MAC 位址為索引）與 `.storage/core.config_entries`（`noise_psk`）。HA 介面不會顯示它。
 
-- 已加入 HA 的使用者：從上述檔案讀出金鑰（手冊提供 Terminal 附加元件的一行指令）。
-- 不想找金鑰的使用者：恢復原廠設定後用 Improv（USB 或藍牙）設定 Wi-Fi，裝置沒有金鑰，可直接連線。
+- 剛買來、沒加入過 HA 的 Voice PE（手冊的主要情境）：沒有金鑰。用 Improv（USB：官方安裝頁面或 web.esphome.io；藍牙：improv-wifi.com）設定 Wi-Fi 後，程式直接以明文連線，完全不需要 HA。
+- 已加入 HA 的使用者：從上述檔案讀出金鑰（手冊附錄提供 Terminal 附加元件的一行指令），或恢復原廠設定改走上一種情境。
 
 程式用 mDNS（`_esphomelib._tcp`）自動搜尋 Voice PE，TXT 紀錄會說明裝置是否已設定金鑰（`api_encryption` / `api_encryption_supported`），
 所以在連線前就能提醒「需要金鑰」或「不需要金鑰」。金鑰錯誤、缺少金鑰屬於重試也無法解決的錯誤，程式會說明原因後結束。

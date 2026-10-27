@@ -160,7 +160,7 @@ async def _find_target(
     if found.encryption == "key" and not args.key:
         _LOGGER.error(
             "這台 Voice PE 設有 API 加密金鑰，請用 --key 或設定檔提供。"
-            "取得方式請見 docs/user-guide.md「取得加密金鑰」。"
+            "取得方式請見 docs/user-guide.md 附錄「取得加密金鑰」。"
         )
         return None
     if found.encryption == "none" and args.key:

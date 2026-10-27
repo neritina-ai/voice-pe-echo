@@ -3,7 +3,7 @@
 在電腦上執行後 **24 小時透過 Voice PE 收音**：對 Voice PE 說一句話，電腦喇叭就把原話播出來，直到關閉程式。
 這是熟悉 Voice PE 的第一步——確認它聽得到你、聽到的是什麼聲音。
 
-- 不需要刷韌體，原廠 Voice PE 即可
+- 不需要安裝 Home Assistant，也不需要改韌體：剛買來的 Voice PE 連上 Wi-Fi 就能用
 - 不需要喚醒詞，啟動後一直收音
 - 內建防回授（電腦喇叭的聲音不會被無限重播）
 - Voice PE 的燈環與終端機的音量列即時顯示收音狀態
@@ -11,16 +11,21 @@
 
 ## 快速開始
 
-1. **Voice PE 設定**：Voice PE 已加入 Home Assistant 的話，先更新韌體、取得加密金鑰，並在 HA 暫時停用這台裝置。
-   詳細步驟見 **[使用手冊 §2](docs/user-guide.md#2-voice-pe-需要的設定)**。
+以剛買來的 Voice PE、電腦上沒有 Home Assistant 為例：
+
+1. **讓 Voice PE 連上 Wi-Fi**：用 USB-C 線接上電腦，以 Chrome／Edge 打開官方安裝頁面
+   <https://esphome.github.io/home-assistant-voice-pe/> → CONNECT → 設定 Wi-Fi（可順便更新成最新官方韌體）。
+   也可以用藍牙設定，詳見 **[使用手冊 §2](docs/user-guide.md#2-讓-voice-pe-連上-wi-fi)**。
 2. 安裝 [Python 3.11 以上](https://www.python.org/downloads/)（Windows 安裝時勾選「Add python.exe to PATH」）。
-3. 把 `voice-pe-echo.example.toml` 複製成 `voice-pe-echo.toml`，填入金鑰（沒有金鑰就留空）。
-4. 啟動：Windows 雙擊 `run.bat`；macOS／Linux 執行 `./run.sh`（Linux 需先 `sudo apt install libportaudio2`）。
-5. 聽到 Voice PE 的提示音、燈環開始旋轉後，說一句話，電腦就會重播。按 `Ctrl+C` 結束。
+3. 啟動：Windows 雙擊 `run.bat`；macOS／Linux 執行 `./run.sh`（Linux 需先 `sudo apt install libportaudio2`）。
+   程式會自動在區網找到 Voice PE，不需要任何設定。
+4. 聽到 Voice PE 的提示音、燈環開始旋轉後，說一句話，電腦就會重播。按 `Ctrl+C` 結束。
+
+Voice PE 已經加入 Home Assistant？請看 [使用手冊附錄](docs/user-guide.md#附錄voice-pe-已經加入-home-assistant)。
 
 ## 文件
 
-- [使用手冊](docs/user-guide.md)：Voice PE 設定、安裝、使用、擺放與防回授、參數、疑難排解
+- [使用手冊](docs/user-guide.md)：Voice PE 連上 Wi-Fi、安裝、使用、擺放與防回授、參數、疑難排解；附錄說明已加入 Home Assistant 的情況
 - [設計說明](docs/design.md)：為什麼這樣設計（收音方式、免喚醒詞、回授、斷句、測試）
 
 ## 專案結構

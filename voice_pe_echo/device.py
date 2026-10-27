@@ -147,7 +147,7 @@ class VoicePE:
         except RequiresEncryptionAPIError as err:
             raise FatalDeviceError(
                 "這台 Voice PE 設有 API 加密金鑰，請用 --key 或設定檔提供金鑰。"
-                "取得方式請見 docs/user-guide.md「取得加密金鑰」。"
+                "取得方式請見 docs/user-guide.md 附錄「取得加密金鑰」。"
             ) from err
         except InvalidEncryptionKeyAPIError as err:
             raise FatalDeviceError(
@@ -255,7 +255,7 @@ class VoicePE:
             if self._occupied_by is not None:
                 _LOGGER.error(
                     "Voice PE 的語音助理正被另一個程式使用（%s）。"
-                    "通常是 Home Assistant：請在 HA 停用這台裝置（見 docs/user-guide.md）。"
+                    "通常是 Home Assistant：請在 HA 停用這台裝置（見 docs/user-guide.md 附錄）。"
                     "%.0f 秒後再試…",
                     self._occupied_by,
                     OCCUPIED_RETRY_S,
